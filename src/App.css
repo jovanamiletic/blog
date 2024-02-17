@@ -70,13 +70,6 @@ textarea {
   cursor: pointer;
 }
 
-.buttons,
-.logout {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
 .button {
   border: none;
   padding: 5px;
@@ -84,6 +77,15 @@ textarea {
   color: white;
   font-weight: 500;
   cursor: pointer;
+  position: relative;
+  z-index: 1000 !important;
+}
+
+.buttons,
+.logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .button:focus {
