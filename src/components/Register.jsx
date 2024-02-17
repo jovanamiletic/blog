@@ -13,9 +13,9 @@ export default function Register({ setShowRegister }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = {
-      username: usernameRef.current.value,
+      korisnickoime: usernameRef.current.value,
       email: emailRef.current.value,
-      password: passwordRef.current.value,
+      lozinka: passwordRef.current.value,
     };
 
     try {
@@ -29,15 +29,14 @@ export default function Register({ setShowRegister }) {
   return (
     <div className="registerContainer">
       <div className="logo">
-        <Room className="logoIcon" />
-        <span>LamaPin</span>
+        <Room  />
+        Pin
       </div>
       <form onSubmit={handleSubmit}>
-        <input autoFocus placeholder="username" ref={usernameRef} />
-        <input type="email" placeholder="email" ref={emailRef} />
+        <input autoFocus placeholder="username" ref={usernameRef}/>
+        <input type="email" placeholder="email" ref={emailRef}/>
         <input
           type="password"
-          min="6"
           placeholder="password"
           ref={passwordRef}
         />
@@ -45,9 +44,9 @@ export default function Register({ setShowRegister }) {
           Register
         </button>
         {success && (
-          <span className="success">Successfull. You can login now!</span>
+          <span className="success">Uspesno! Mozes da se ulogujes sada!</span>
         )}
-        {error && <span className="failure">Something went wrong!</span>}
+        {error && <span className="failure">Nesto nije u redu!</span>}
       </form>
       <Cancel
         className="registerCancel"

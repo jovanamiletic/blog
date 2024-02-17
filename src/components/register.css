@@ -10,10 +10,19 @@
   left: 0;
   right: 0;
   margin: auto;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.registerContainer .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: slateblue;
+  font-weight: 700;
 }
 
 .registerCancel {
@@ -21,14 +30,6 @@
   top: 3px;
   right: 3px;
   cursor: pointer;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: slateblue;
-  font-weight: 700;
 }
 
 .registerBtn {

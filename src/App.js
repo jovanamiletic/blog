@@ -14,10 +14,9 @@ import Login from "./components/Login";
 function App() {
   const myStorage = window.localStorage;
   const mapRef = useRef(null);
-  const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(myStorage.getItem("user"));
-  // const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState("Milos");
+  // const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(myStorage.getItem("user"));
+  const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(null);
   const [pins, setPins] = useState([]);
-  // const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [novoMesto, setNovoMesto] = useState(null);
   const [naslov, setNaslov] = useState(null);
   const [opis, setOpis] = useState(null);
@@ -42,9 +41,9 @@ function App() {
     popupAnchor: [0, -30],
   });
 
-  // const handleMarkerClick = (id, sirina, duzina) => {
+  // const handleMarkerClick = (id, lat, long) => {
   //   setCurrentPlaceId(id);
-  //   setViewport({ ...viewport, sirina, duzina });
+  //   setViewport({ ...viewport, sirina:lat, duzina:long });
   // };
 
   const handleAddClick = (e) => {
@@ -115,17 +114,17 @@ function App() {
           icon={trenutnoKorisnickoIme === pin.korisnickoime ? myIcon: guestIcon}>
             <Popup>
             <div className="card">
-                <label>Place</label>
+                <label>Mesto</label>
                 <h4 className="place">{pin.naslov}</h4>
-                <label>Review</label>
+                <label>Recenzija</label>
                 <p className="desc">{pin.opis}</p>
-                <label>Rating</label>
+                <label>Ocena</label>
                 <div className="stars">
                   {Array(pin.ocena).fill(<Star className="star" />)}
                 </div>
-                <label>Information</label>
+                <label>Informacije</label>
                 <span className="username">
-                  Created by <b>{pin.korisnickoime}</b>
+                  Kreirao/la <b>{pin.korisnickoime}</b>
                 </span>
               </div>
             </Popup>
@@ -136,18 +135,18 @@ function App() {
           <Marker position={[novoMesto.sirina, novoMesto.duzina]}  icon={myIcon} >
             <Popup>
               <form onSubmit={handleSubmit}>
-                <label>Title</label>
+                <label>Naslov</label>
                 <input
-                  placeholder="Enter a title"
+                  placeholder="Unesite naslov"
                   autoFocus
                   onChange={(e) => setNaslov(e.target.value)}
                 />
-                <label>Description</label>
+                <label>Opis</label>
                 <textarea
-                  placeholder="Say us something about this place."
+                  placeholder="Kazite nam nesto o ovom mestu."
                   onChange={(e) => setOpis(e.target.value)}
                 />
-                <label>Rating</label>
+                <label>Ocena</label>
                 <select onChange={(e) => setOcena(e.target.value)}>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -156,7 +155,7 @@ function App() {
                   <option value="5">5</option>
                 </select>
                 <button type="submit" className="submitButton">
-                  Add Pin
+                  Dodaj pin
                 </button>
               </form>
             </Popup>
@@ -181,14 +180,8 @@ function App() {
           </button>
         </div>
       )}
-      {showRegister && <Register setShowRegister={setShowRegister} />}
-      {showLogin && (
-        <Login
-          setShowLogin={setShowLogin}
-          setTrenutnoKorisnickoIme={setTrenutnoKorisnickoIme}
-          myStorage={myStorage}
-        />
-      )}
+      {showRegister && <Register setShowRegister={setShowRegister}/>}
+      {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setTrenutnoKorisnickoIme={setTrenutnoKorisnickoIme}/>}
     </div>
   );
 }
