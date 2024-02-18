@@ -20,6 +20,7 @@ import Login from "./components/Login";
 function App() {
   const myStorage = window.localStorage;
   const mapRef = useRef(null);
+  const adresa = process.env.adresa || "localhost";
   // const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(myStorage.getItem("user"));
   const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(null);
   const [pins, setPins] = useState([]);
