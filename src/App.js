@@ -1,4 +1,4 @@
-import "./App.css";
+import "./app.css";
 import {
   MapContainer,
   TileLayer,
@@ -74,7 +74,7 @@ function App() {
 
     try {
       console.log(newPin);
-      const res = await axios.post("/pins", newPin);
+      const res = await axios.post("http://localhost:8800/api/pins", newPin);
       setPins([...pins, res.data]);
       console.log(pins);
       setNovoMesto(null);
@@ -86,7 +86,7 @@ function App() {
   useEffect(() => {
     const getPins = async () => {
       try {
-        const allPins = await axios.get("/pins");
+        const allPins = await axios.get("http://localhost:8800/api/pins");
         setPins(allPins.data.filter((p) => p.sirina < 100));
         console.log(allPins.data.filter((p) => p.sirina < 100));
       } catch (err) {
