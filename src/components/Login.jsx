@@ -3,7 +3,11 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import "./login.css";
 
-export default function Login({ setShowLogin, setTrenutnoKorisnickoIme, myStorage }) {
+export default function Login({
+  setShowLogin,
+  setTrenutnoKorisnickoIme,
+  myStorage,
+}) {
   const [error, setError] = useState(false);
   const usernameRef = useRef();
   const passwordRef = useRef();
@@ -18,7 +22,7 @@ export default function Login({ setShowLogin, setTrenutnoKorisnickoIme, myStorag
       const res = await axios.post("/users/login", user);
       setTrenutnoKorisnickoIme(res.data.korisnickoime);
       // myStorage.setItem("user", res.data.korisnickoime);
-      setShowLogin(false)
+      setShowLogin(false);
       setError(false);
     } catch (err) {
       setError(true);
@@ -28,16 +32,12 @@ export default function Login({ setShowLogin, setTrenutnoKorisnickoIme, myStorag
   return (
     <div className="loginContainer">
       <div className="logo">
-        <Room  />
+        <Room />
         Pin
       </div>
       <form onSubmit={handleSubmit}>
         <input autoFocus placeholder="username" ref={usernameRef} />
-        <input
-          type="password"
-          placeholder="password"
-          ref={passwordRef}
-        />
+        <input type="password" placeholder="password" ref={passwordRef} />
         <button className="loginBtn" type="submit">
           Login
         </button>

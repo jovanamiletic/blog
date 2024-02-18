@@ -1,13 +1,19 @@
-import "./app.css";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import "./App.css";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
 import { useEffect, useState, useRef } from "react";
 import { Room, Star } from "@material-ui/icons";
 import L from "leaflet";
-import {Icon} from "leaflet";
+//import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import axios from "axios";
-import { format } from "timeago.js";
+//import { format } from "timeago.js";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
@@ -26,16 +32,16 @@ function App() {
     duzina: 17.071727,
     zoom: 4,
   });
-  const [showRegister, setShowRegister] = useState(false); 
+  const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const myIcon = L.icon({
-    iconUrl: '/map-marker-my.svg',
+    iconUrl: "/map-marker-my.svg",
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
   });
   const guestIcon = L.icon({
-    iconUrl: '/map-marker-guest.svg',
+    iconUrl: "/map-marker-guest.svg",
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
@@ -47,7 +53,7 @@ function App() {
   // };
 
   const handleAddClick = (e) => {
-    console.log(e)
+    console.log(e);
     const { lat, lng } = e.latlng;
     setNovoMesto({
       sirina: lat,
@@ -67,10 +73,10 @@ function App() {
     };
 
     try {
-      console.log(newPin)
+      console.log(newPin);
       const res = await axios.post("/pins", newPin);
       setPins([...pins, res.data]);
-      console.log(pins)
+      console.log(pins);
       setNovoMesto(null);
     } catch (err) {
       console.log(err);
@@ -81,8 +87,8 @@ function App() {
     const getPins = async () => {
       try {
         const allPins = await axios.get("/pins");
-        setPins(allPins.data.filter(p=> p.sirina< 100));
-        console.log(allPins.data.filter(p=> p.sirina< 100))
+        setPins(allPins.data.filter((p) => p.sirina < 100));
+        console.log(allPins.data.filter((p) => p.sirina < 100));
       } catch (err) {
         console.log(err);
       }
@@ -95,7 +101,6 @@ function App() {
     myStorage.removeItem("user");
   };
 
-  
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <MapContainer
@@ -109,11 +114,16 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {pins.map(pin => (
-          <Marker key={pin._id} position={[pin.sirina, pin.duzina]}
-          icon={trenutnoKorisnickoIme === pin.korisnickoime ? myIcon: guestIcon}>
+        {pins.map((pin) => (
+          <Marker
+            key={pin._id}
+            position={[pin.sirina, pin.duzina]}
+            icon={
+              trenutnoKorisnickoIme === pin.korisnickoime ? myIcon : guestIcon
+            }
+          >
             <Popup>
-            <div className="card">
+              <div className="card">
                 <label>Mesto</label>
                 <h4 className="place">{pin.naslov}</h4>
                 <label>Recenzija</label>
@@ -130,9 +140,9 @@ function App() {
             </Popup>
           </Marker>
         ))}
-        
+
         {novoMesto && (
-          <Marker position={[novoMesto.sirina, novoMesto.duzina]}  icon={myIcon} >
+          <Marker position={[novoMesto.sirina, novoMesto.duzina]} icon={myIcon}>
             <Popup>
               <form onSubmit={handleSubmit}>
                 <label>Naslov</label>
@@ -160,8 +170,8 @@ function App() {
               </form>
             </Popup>
           </Marker>
-        )} 
-         <MapEventsComponent onMapClick={handleAddClick} />
+        )}
+        <MapEventsComponent onMapClick={handleAddClick} />
       </MapContainer>
       {trenutnoKorisnickoIme ? (
         <button className="button logout" onClick={handleLogout}>
@@ -180,8 +190,14 @@ function App() {
           </button>
         </div>
       )}
-      {showRegister && <Register setShowRegister={setShowRegister}/>}
-      {showLogin && <Login setShowLogin={setShowLogin} myStorage={myStorage} setTrenutnoKorisnickoIme={setTrenutnoKorisnickoIme}/>}
+      {showRegister && <Register setShowRegister={setShowRegister} />}
+      {showLogin && (
+        <Login
+          setShowLogin={setShowLogin}
+          myStorage={myStorage}
+          setTrenutnoKorisnickoIme={setTrenutnoKorisnickoIme}
+        />
+      )}
     </div>
   );
 }
