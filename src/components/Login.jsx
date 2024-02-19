@@ -19,7 +19,10 @@ export default function Login({
       lozinka: passwordRef.current.value,
     };
     try {
-      const res = await axios.post("/users/login", user);
+      const res = await axios.post(
+        "http://localhost:8800/api/users/login",
+        user
+      );
       setTrenutnoKorisnickoIme(res.data.korisnickoime);
       // myStorage.setItem("user", res.data.korisnickoime);
       setShowLogin(false);

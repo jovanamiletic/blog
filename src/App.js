@@ -1,4 +1,4 @@
-import "./app.css";
+import "./App.css";
 import {
   MapContainer,
   TileLayer,
@@ -7,7 +7,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useEffect, useState, useRef } from "react";
-import { Room, Star } from "@material-ui/icons";
+import { Star } from "@material-ui/icons";
 import L from "leaflet";
 //import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -20,7 +20,6 @@ import Login from "./components/Login";
 function App() {
   const myStorage = window.localStorage;
   const mapRef = useRef(null);
-  const adresa = process.env.adresa || "localhost";
   // const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(myStorage.getItem("user"));
   const [trenutnoKorisnickoIme, setTrenutnoKorisnickoIme] = useState(null);
   const [pins, setPins] = useState([]);

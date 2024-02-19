@@ -19,7 +19,7 @@ export default function Register({ setShowRegister }) {
     };
 
     try {
-      await axios.post("/users/register", newUser);
+      await axios.post("http://localhost:8800/api/users/register", newUser);
       setError(false);
       setSuccess(true);
     } catch (err) {
@@ -29,17 +29,13 @@ export default function Register({ setShowRegister }) {
   return (
     <div className="registerContainer">
       <div className="logo">
-        <Room  />
+        <Room />
         Pin
       </div>
       <form onSubmit={handleSubmit}>
-        <input autoFocus placeholder="username" ref={usernameRef}/>
-        <input type="email" placeholder="email" ref={emailRef}/>
-        <input
-          type="password"
-          placeholder="password"
-          ref={passwordRef}
-        />
+        <input autoFocus placeholder="username" ref={usernameRef} />
+        <input type="email" placeholder="email" ref={emailRef} />
+        <input type="password" placeholder="password" ref={passwordRef} />
         <button className="registerBtn" type="submit">
           Register
         </button>
